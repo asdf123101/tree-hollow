@@ -1,6 +1,7 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 
 import Carousel from '../../Components/Carousel'
+import Post from '../../Components/Post'
 
 const testData = [
   {
@@ -23,7 +24,12 @@ const testData = [
 
 class Hollow extends Component {
   public render() {
-    return <Carousel crouselList={testData} />
+    return (
+      <Fragment>
+        <Carousel crouselList={testData} />
+        <Post />
+      </Fragment>
+    )
   }
 }
 
