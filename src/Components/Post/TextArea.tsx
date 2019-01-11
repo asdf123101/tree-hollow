@@ -1,6 +1,12 @@
 import React from 'react'
 
-export default () => {
+export default ({
+  value,
+  handleChange,
+}: {
+  value: string
+  handleChange: (event: React.ChangeEvent<HTMLTextAreaElement>) => void
+}) => {
   return (
     <textarea
       style={{
@@ -13,6 +19,7 @@ export default () => {
         opacity: 0.8,
       }}
       placeholder="Enter your rant"
+      onChange={handleChange}
     />
   )
 }

@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component, Fragment, useState } from 'react'
 
 import Carousel from '../../Components/Carousel'
 import Post from '../../Components/Post'
@@ -22,15 +22,14 @@ const testData = [
   },
 ]
 
-class Hollow extends Component {
-  public render() {
-    return (
-      <Fragment>
-        <Carousel crouselList={testData} />
-        <Post />
-      </Fragment>
-    )
-  }
+const Hollow = () => {
+  const [crouselList, updateCrouselList] = useState(testData)
+  return (
+    <Fragment>
+      <Carousel crouselList={crouselList} />
+      <Post crouselList={crouselList} updateCrousel={updateCrouselList} />
+    </Fragment>
+  )
 }
 
 export default Hollow

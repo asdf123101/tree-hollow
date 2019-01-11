@@ -1,14 +1,12 @@
-import React, { ReactElement } from 'react'
+import React, { Fragment, ReactElement } from 'react'
 import Slider, { Settings } from 'react-slick'
 
 import { CarouselContainer, CarouselFragWrapper } from './style'
 
+import { CrouselDataFrag } from '../types'
+
 import './slick-theme.css'
 import './slick.css'
-
-interface CrouselDataFrag {
-  data: string
-}
 
 export default ({
   crouselList,
@@ -24,15 +22,16 @@ export default ({
     slidesToShow: 1,
     slidesToScroll: 1,
   }
+
   return (
     <CarouselContainer className="container">
       <Slider {...settings}>
-        {crouselList.map(crouselFrag => (
-          <>
-            <CarouselFragWrapper key={crouselFrag.data}>
+        {crouselList.map((crouselFrag, index) => (
+          <Fragment key={index}>
+            <CarouselFragWrapper>
               <p>{crouselFrag.data}</p>
             </CarouselFragWrapper>
-          </>
+          </Fragment>
         ))}
       </Slider>
     </CarouselContainer>
