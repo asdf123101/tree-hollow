@@ -6,10 +6,12 @@ import React, {
   SetStateAction,
   useState,
 } from 'react'
+import { useMutation } from 'react-apollo-hooks'
 
 import TextArea from './TextArea'
 
 import { CrouselDataFrag } from '../types'
+import { UPDATE_HOLLOW_LIST } from './queries'
 
 export default ({
   crouselList,
@@ -20,6 +22,7 @@ export default ({
 }): ReactElement<{}> => {
   const [shouldOpen, setShouldOpen] = useState(false)
   const [textValue, setValue] = useState('')
+  const updateHollowList = useMutation(UPDATE_HOLLOW_LIST)
 
   const handleClick = () => {
     setShouldOpen(!shouldOpen)
@@ -27,7 +30,11 @@ export default ({
       const newCrouselFrag: CrouselDataFrag = {
         data: textValue,
       }
-      updateCrousel(crouselList.concat(newCrouselFrag))
+      updateHollowList({ variables: { hollow: textValue } }).then(
+        (res: any) => {
+          updateCrousel(res.data.updateHollowList)
+        }
+      )
     }
   }
   return (

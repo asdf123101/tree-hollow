@@ -22,16 +22,25 @@ const carouselList = [
 // The GraphQL schema
 export const typeDefs = gql`
   type Query {
-    hollows: [hollow]
+    hollows: [Hollow]
   }
 
-  type hollow {
+  type Hollow {
     data: String
+  }
+
+  type Mutation {
+    updateHollowList(hollow: String): [Hollow]
   }
 `
 
 export const resolvers = {
   Query: {
     hollows: () => carouselList,
+  },
+  Mutation: {
+    updateHollowList: (_: any, { hollow }: { hollow: string }) => {
+      return carouselList.concat({ data: hollow })
+    },
   },
 }
