@@ -3,7 +3,7 @@ import Slider, { Settings } from 'react-slick'
 
 import { CarouselContainer, CarouselFragWrapper } from './style'
 
-import { CrouselDataFrag } from '../types'
+import { HollowPayload } from '../types'
 
 import './slick-theme.css'
 import './slick.css'
@@ -11,7 +11,7 @@ import './slick.css'
 export default ({
   crouselList,
 }: {
-  crouselList: CrouselDataFrag[]
+  crouselList: HollowPayload[]
 }): ReactElement<{}> => {
   const settings: Settings = {
     autoplay: true,

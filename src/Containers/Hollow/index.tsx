@@ -1,4 +1,4 @@
-import React, { Component, Fragment, useState } from 'react'
+import React, { Fragment, useState } from 'react'
 import { useQuery } from 'react-apollo-hooks'
 
 import Carousel from '../../Components/Carousel'
@@ -17,7 +17,7 @@ const Hollow = () => {
   return (
     <Fragment>
       <Carousel crouselList={crouselList} />
-      <Post crouselList={crouselList} updateCrousel={updateCrouselList} />
+      <Post hollowList={crouselList} updateCrousel={updateCrouselList} />
     </Fragment>
   )
 }

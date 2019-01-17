@@ -10,16 +10,17 @@ import { useMutation } from 'react-apollo-hooks'
 
 import TextArea from './TextArea'
 
-import { CrouselDataFrag } from '../types'
+import { HollowPayload } from '../types'
 import { UPDATE_HOLLOW_LIST } from './queries'
 
 export default ({
-  crouselList,
+  hollowList,
   updateCrousel,
 }: {
-  crouselList: CrouselDataFrag[]
-  updateCrousel: Dispatch<SetStateAction<CrouselDataFrag[]>>
+  hollowList: HollowPayload[]
+  updateCrousel: Dispatch<SetStateAction<HollowPayload[]>>
 }): ReactElement<{}> => {
+  const [isUpdateSuccessful, setIsUpdateSuccessful] = useState(false)
   const [shouldOpen, setShouldOpen] = useState(false)
   const [textValue, setValue] = useState('')
   const updateHollowList = useMutation(UPDATE_HOLLOW_LIST)
@@ -27,21 +28,22 @@ export default ({
   const handleClick = () => {
     setShouldOpen(!shouldOpen)
     if (shouldOpen) {
-      const newCrouselFrag: CrouselDataFrag = {
-        data: textValue,
-      }
-      updateHollowList({ variables: { hollow: textValue } }).then(
-        (res: any) => {
-          updateCrousel(res.data.updateHollowList)
-        }
-      )
+      // always display on front-end
+      updateCrousel(hollowList.concat({ data: textValue }))
+      // show a hint when a res is sent from server
+      // TODO: error handling
+      updateHollowList({ variables: { hollow: textValue } }).then(() => {
+        setIsUpdateSuccessful(true)
+      })
+    } else {
+      setIsUpdateSuccessful(false)
     }
   }
   return (
     <Fragment>
+      {isUpdateSuccessful && <h3>You hollow has been sent!</h3>}
       {shouldOpen && (
         <TextArea
-          value={textValue}
           handleChange={(event: ChangeEvent<HTMLTextAreaElement>) =>
             setValue(event.currentTarget.value)
           }

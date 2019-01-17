@@ -1,6 +1,9 @@
 import { gql } from 'apollo-server'
 
-const carouselList = [
+import { HollowPayload } from '../src/Components/types'
+
+// TODO: move to a db
+let carouselList: HollowPayload[] = [
   {
     data:
       'Nulla non enim ut mi egestas rhoncus sed sed augue. Aenean ac feugiat risus, et pellentesque diam. In pretium lacus eget semper faucibus. Curabitur blandit nec lacus id posuere. Nunc ac ante volutpat, euismod lacus eu, laoreet dolor. Nulla congue leo eu eros finibus placerat. Pellentesque pretium vitae lacus ut rutrum. Proin sed lorem augue. Sed posuere, ipsum eu tempor pellentesque, orci lacus interdum magna, ac hendrerit nisi diam tempor erat. Integer porttitor mi vitae arcu faucibus fermentum eget non lacus.',
@@ -40,7 +43,8 @@ export const resolvers = {
   },
   Mutation: {
     updateHollowList: (_: any, { hollow }: { hollow: string }) => {
-      return carouselList.concat({ data: hollow })
+      carouselList = carouselList.concat({ data: hollow })
+      return carouselList
     },
   },
 }

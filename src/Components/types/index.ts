@@ -1,3 +1,3 @@
-export interface CrouselDataFrag {
+export interface HollowPayload {
   data: string
 }

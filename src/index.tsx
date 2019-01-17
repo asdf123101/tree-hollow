@@ -11,7 +11,7 @@ import * as serviceWorker from './serviceWorker'
 // gql setup
 const cache = new InMemoryCache()
 const client = new ApolloClient({
-  uri: 'http://localhost:3000/graphql',
+  uri: 'http://localhost:3001/graphql',
   cache,
 })
 

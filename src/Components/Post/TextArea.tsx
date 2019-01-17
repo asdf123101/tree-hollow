@@ -1,10 +1,8 @@
 import React from 'react'
 
 export default ({
-  value,
   handleChange,
 }: {
-  value: string
   handleChange: (event: React.ChangeEvent<HTMLTextAreaElement>) => void
 }) => {
   return (
