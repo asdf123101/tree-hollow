@@ -1,11 +1,16 @@
 import { ApolloServer } from 'apollo-server-express'
 import express from 'express'
+import helmet from 'helmet'
 
 import { resolvers, typeDefs } from './schema'
 
 const app = express()
+
+// security
+app.use(helmet())
+
+// graphql middleware
 const server = new ApolloServer({
-  // These will be defined for both new or existing severs
   typeDefs,
   resolvers,
   context: ({ req }: { req: any }) => ({
@@ -14,8 +19,8 @@ const server = new ApolloServer({
 })
 server.applyMiddleware({ app })
 
-const port = 3001
-const host = 'localhost'
+const port = parseInt(process.env.PORT) || 3001
+const host = process.env.HOST || 'localhost'
 
 app.listen(port, host, (err: any) => {
   if (err) {
