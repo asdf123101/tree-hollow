@@ -2,15 +2,15 @@ import * as S from 'sequelize'
 
 import { ModelConf } from 'controllers/types'
 
-interface HollowType {
+export interface HollowType {
   payload: string
   // only for dev, these fields are added automatically
-  createdAt: Date
-  updatedAt: Date
+  createdAt?: Date
+  updatedAt?: Date
 }
 
 const Hollow: S.DefineModelAttributes<HollowType> = {
-  payload: { type: S.STRING, allowNull: false },
+  payload: { type: S.TEXT, allowNull: false },
   createdAt: S.DATE,
   updatedAt: S.DATE,
 }

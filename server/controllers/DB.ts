@@ -5,7 +5,7 @@ import { DbConOpt, ModelConf, ModelDef } from 'controllers/types'
 import { Log } from 'utils/Logger'
 
 export class DB {
-  get db() {
+  get getDb() {
     return this.db_
   }
 
@@ -23,7 +23,7 @@ export class DB {
   constructor(public options: DbConOpt) {}
 
   private db_: S.Sequelize
-  private tables_: { [key: string]: ModelDef<any> }
+  private tables_: { [key: string]: ModelDef<any> } = {}
   private tableNames_: string[] = []
   private activeTableName_: string
   private defaultDbOptions: S.Options = {
@@ -35,27 +35,18 @@ export class DB {
   }
 
   public init() {
-    const {
-      dbName,
-      dbUserName,
-      dbPassword,
-      options = this.defaultDbOptions,
-    } = this.options
+    const { dbName, dbUserName, dbPassword, options } = this.options
+    Object.assign(options, this.defaultDbOptions)
     Log.info('DB options:\n %o', options)
     this.db_ = new Sequelize(dbName, dbUserName, dbPassword, options)
   }
 
-  public async defineModel<TModel>(modelConf: ModelConf<TModel>) {
+  public defineModel<TModel>(modelConf: ModelConf<TModel>) {
     const { modelName, modelAttributes } = modelConf
     const model: ModelDef<TModel> = this.db_.define<S.Instance<TModel>, TModel>(
       modelName,
       modelAttributes
     )
-    try {
-      await model.sync()
-    } catch (e) {
-      Log.error(e)
-    }
     this.tables_[modelName] = model
     this.tableNames_.push(modelName)
   }
