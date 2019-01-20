@@ -1,3 +1,3 @@
 export interface HollowPayload {
-  data: string
+  payload: string
 }

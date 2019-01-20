@@ -29,7 +29,7 @@ export default ({
         {crouselList.map((crouselFrag, index) => (
           <Fragment key={index}>
             <CarouselFragWrapper>
-              <p>{crouselFrag.data}</p>
+              <p>{crouselFrag.payload}</p>
             </CarouselFragWrapper>
           </Fragment>
         ))}

@@ -1,6 +1,7 @@
 import * as S from 'sequelize'
 
 import { ModelConf } from 'controllers/types'
+import { TagType } from './Tags'
 
 export interface HollowType {
   payload: string
@@ -18,4 +19,14 @@ const Hollow: S.DefineModelAttributes<HollowType> = {
 export const HollowModel: ModelConf<HollowType> = {
   modelName: 'Hollow',
   modelAttributes: Hollow,
+}
+
+export interface HollowInstance
+  extends S.Instance<HollowType>,
+    S.DefineModelAttributes<HollowType> {
+  setTags: S.BelongsToManySetAssociationsMixin<
+    S.Instance<TagType>,
+    string,
+    S.DefineModelAttributes<any>
+  >
 }

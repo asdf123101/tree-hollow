@@ -20,7 +20,8 @@ export class DB {
     this.activeTableName_ = tableName
   }
 
-  constructor(public options: DbConOpt) {}
+  // singleton
+  private constructor() {}
 
   private db_: S.Sequelize
   private tables_: { [key: string]: ModelDef<any> } = {}
@@ -34,8 +35,8 @@ export class DB {
     operatorsAliases: false,
   }
 
-  public init() {
-    const { dbName, dbUserName, dbPassword, options } = this.options
+  public init(dbConOpt: DbConOpt) {
+    const { dbName, dbUserName, dbPassword, options } = dbConOpt
     Object.assign(options, this.defaultDbOptions)
     Log.info('DB options:\n %o', options)
     this.db_ = new Sequelize(dbName, dbUserName, dbPassword, options)
@@ -77,5 +78,14 @@ export class DB {
       Log.verbose('Current talbes: %s', this.tableNames_)
       throw Error(`Table with name ${tableName} does not exist!`)
     }
+  }
+
+  private static instance: DB
+
+  public static getInstance() {
+    if (!DB.instance) {
+      DB.instance = new DB()
+    }
+    return DB.instance
   }
 }

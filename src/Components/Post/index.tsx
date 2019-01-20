@@ -29,7 +29,7 @@ export default ({
     setShouldOpen(!shouldOpen)
     if (shouldOpen) {
       // always display on front-end
-      updateCrousel(hollowList.concat({ data: textValue }))
+      updateCrousel(hollowList.concat({ payload: textValue }))
       // show a hint when a res is sent from server
       // TODO: error handling
       updateHollowList({ variables: { hollow: textValue } }).then(() => {

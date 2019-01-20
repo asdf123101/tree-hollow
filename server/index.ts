@@ -2,12 +2,17 @@ import { ApolloServer } from 'apollo-server-express'
 import express from 'express'
 import helmet from 'helmet'
 
+import { HollowCtrlr } from 'controllers/HollowCtrlr'
 import { resolvers, typeDefs } from './schema'
 
 const app = express()
 
 // security
 app.use(helmet())
+
+// database
+const hollowCtrlr = new HollowCtrlr()
+;(async () => await hollowCtrlr.initDbWithData())()
 
 // graphql middleware
 const server = new ApolloServer({
