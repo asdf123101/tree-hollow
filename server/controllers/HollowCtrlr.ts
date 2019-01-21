@@ -16,7 +16,7 @@ export class HollowCtrlr {
     return this.db
   }
 
-  public async initDbWithData() {
+  public defineTables() {
     try {
       const dbConfig: DbConOpt = {
         dbName: 'TreeHollow',
@@ -38,27 +38,32 @@ export class HollowCtrlr {
       const junctionTbName = 'HollowTag'
       HollowTable.belongsToMany(TagTable, { through: junctionTbName })
       TagTable.belongsToMany(HollowTable, { through: junctionTbName })
+    } catch (e) {
+      Log.error('Error during table definition %o', e)
+    }
+  }
 
-      // init data
-      // TODO: add postfix dev tables with something
-      if (process.env.NODE_ENV !== 'prod') {
-        await this.db.getDb.sync({ force: true })
-        const tagInitProm = []
-        for (const tag of initialTags) {
-          tagInitProm.push(TagTable.create(tag))
-        }
-        await Promise.all(tagInitProm)
-
-        await TagTable.all().then(tags => {
-          for (const hollow of initialHowllows) {
-            HollowTable.create(hollow).then((hollowInst: HollowInstance) =>
-              hollowInst.setTags([
-                tags[Math.floor(Math.random() * Math.floor(tags.length))],
-              ])
-            )
-          }
-        })
+  public async initDbWithData() {
+    // init data
+    try {
+      await this.db.getDb.sync({ force: true })
+      const HollowTable = this.db.getTable(HollowModel.modelName)
+      const TagTable = this.db.getTable(TagModel.modelName)
+      const tagInitProm = []
+      for (const tag of initialTags) {
+        tagInitProm.push(TagTable.create(tag))
       }
+      await Promise.all(tagInitProm)
+
+      await TagTable.all().then(tags => {
+        for (const hollow of initialHowllows) {
+          HollowTable.create(hollow).then((hollowInst: HollowInstance) =>
+            hollowInst.setTags([
+              tags[Math.floor(Math.random() * Math.floor(tags.length))],
+            ])
+          )
+        }
+      })
     } catch (e) {
       Log.error('DB init error %s.Exiting now.', e)
       this.db.getDb.close()

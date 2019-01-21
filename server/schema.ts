@@ -5,7 +5,7 @@ import { HollowModel } from 'models/Hollow'
 import { HollowPayload } from '../src/Components/types'
 
 // TODO: move to a db
-let carouselList: HollowPayload[] = [
+const carouselList: HollowPayload[] = [
   {
     payload:
       'Nulla non enim ut mi egestas rhoncus sed sed augue. Aenean ac feugiat risus, et pellentesque diam. In pretium lacus eget semper faucibus. Curabitur blandit nec lacus id posuere. Nunc ac ante volutpat, euismod lacus eu, laoreet dolor. Nulla congue leo eu eros finibus placerat. Pellentesque pretium vitae lacus ut rutrum. Proin sed lorem augue. Sed posuere, ipsum eu tempor pellentesque, orci lacus interdum magna, ac hendrerit nisi diam tempor erat. Integer porttitor mi vitae arcu faucibus fermentum eget non lacus.',
@@ -35,7 +35,7 @@ export const typeDefs = gql`
   }
 
   type Mutation {
-    updateHollowList(hollow: String): [Hollow]
+    updateHollowList(hollow: String): Hollow
   }
 `
 // init database
@@ -43,14 +43,16 @@ const hollowCtrlr = new HollowCtrlr()
 
 export const resolvers = {
   Query: {
-    hollows: async () => {
-      return await hollowCtrlr.getConn.getTable(HollowModel.modelName).all()
+    hollows: () => {
+      return hollowCtrlr.getConn
+        .getTable(HollowModel.modelName)
+        .findAll({ limit: 5 })
     },
   },
   Mutation: {
     updateHollowList: (_: any, { hollow }: { hollow: string }) => {
-      carouselList = carouselList.concat({ payload: hollow })
-      return carouselList
+      const hollowTbl = hollowCtrlr.getConn.getTable(HollowModel.modelName)
+      return hollowTbl.create({ payload: hollow })
     },
   },
 }

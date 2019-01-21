@@ -12,7 +12,10 @@ app.use(helmet())
 
 // database
 const hollowCtrlr = new HollowCtrlr()
-;(async () => await hollowCtrlr.initDbWithData())()
+hollowCtrlr.defineTables()
+if (process.env.NODE_ENV === 'dev') {
+  ;(async () => await hollowCtrlr.initDbWithData())()
+}
 
 // graphql middleware
 const server = new ApolloServer({

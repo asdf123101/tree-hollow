@@ -34,6 +34,7 @@ export default ({
       // TODO: error handling
       updateHollowList({ variables: { hollow: textValue } }).then(() => {
         setIsUpdateSuccessful(true)
+        setTimeout(() => setIsUpdateSuccessful(false), 3000)
       })
     } else {
       setIsUpdateSuccessful(false)
