@@ -1,5 +1,4 @@
-import { TagType } from 'models/Tags'
-import { HollowType } from './Hollow'
+import { HollowType, TagType } from 'types/server'
 
 export const initialTags: TagType[] = [
   { name: 'programmer' },

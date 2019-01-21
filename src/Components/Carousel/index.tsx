@@ -3,7 +3,8 @@ import Slider, { Settings } from 'react-slick'
 
 import { CarouselContainer, CarouselFragWrapper } from './style'
 
-import { HollowPayload } from '../types'
+// can't set baseUrl and path with create-react-app atm
+import { HollowType } from '../../../types/server'
 
 import './slick-theme.css'
 import './slick.css'
@@ -11,7 +12,7 @@ import './slick.css'
 export default ({
   crouselList,
 }: {
-  crouselList: HollowPayload[]
+  crouselList: HollowType[]
 }): ReactElement<{}> => {
   const settings: Settings = {
     autoplay: true,

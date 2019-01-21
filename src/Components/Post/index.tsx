@@ -10,15 +10,15 @@ import { useMutation } from 'react-apollo-hooks'
 
 import TextArea from './TextArea'
 
-import { HollowPayload } from '../types'
+import { HollowType } from '../../../types/server'
 import { UPDATE_HOLLOW_LIST } from './queries'
 
 export default ({
   hollowList,
   updateCrousel,
 }: {
-  hollowList: HollowPayload[]
-  updateCrousel: Dispatch<SetStateAction<HollowPayload[]>>
+  hollowList: HollowType[]
+  updateCrousel: Dispatch<SetStateAction<HollowType[]>>
 }): ReactElement<{}> => {
   const [isUpdateSuccessful, setIsUpdateSuccessful] = useState(false)
   const [shouldOpen, setShouldOpen] = useState(false)

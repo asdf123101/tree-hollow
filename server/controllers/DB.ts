@@ -1,7 +1,7 @@
 import * as S from 'sequelize'
 import Sequelize from 'sequelize'
 
-import { DbConOpt, ModelConf, ModelDef } from 'controllers/types'
+import { DbConOpt, ModelConf, ModelDef } from 'types/server'
 import { Log } from 'utils/Logger'
 
 export class DB {

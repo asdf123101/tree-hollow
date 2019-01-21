@@ -1,8 +1,8 @@
 import { DB } from 'controllers/DB'
-import { DbConOpt } from 'controllers/types'
-import { HollowInstance, HollowModel } from 'models/Hollow'
+import { HollowModel } from 'models/Hollow'
 import { initialHowllows, initialTags } from 'models/initialData'
 import { TagModel } from 'models/Tags'
+import { DbConOpt, HollowInstance } from 'types/server'
 import { Log } from 'utils/Logger'
 
 export class HollowCtrlr {
