@@ -1,21 +1,22 @@
-import React, { Component } from 'react'
-import { theme, ThemeProvider } from '../../theme'
+import React, { Component, Fragment } from 'react'
 
 import Intro from '../../Components/Intro'
+import { theme, ThemeProvider } from '../../theme'
 import Hollow from '../Hollow'
-
 import GlobalStyles from './globalStyles'
 
-import AppWrapper from './style'
+import 'normalize.css'
 
 class App extends Component {
   public render() {
     return (
-      <AppWrapper className="App">
-        <GlobalStyles />
-        <Intro />
-        <Hollow />
-      </AppWrapper>
+      <ThemeProvider theme={theme}>
+        <Fragment>
+          <GlobalStyles />
+          <Intro />
+          <Hollow />
+        </Fragment>
+      </ThemeProvider>
     )
   }
 }

@@ -5,7 +5,6 @@ import { ApolloProvider } from 'react-apollo-hooks'
 import ReactDOM from 'react-dom'
 
 import App from './Containers/App'
-import './index.css'
 import * as serviceWorker from './serviceWorker'
 
 // gql setup

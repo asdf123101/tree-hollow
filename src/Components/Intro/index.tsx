@@ -1,8 +1,9 @@
 import React from 'react'
 
+import { Header } from './style'
+
 export default () => (
-  <h2>
-    这是一个树洞 <br />
-    This is a tree hollow
-  </h2>
+  <Header>
+    <b>Tree Hollow</b>
+  </Header>
 )
