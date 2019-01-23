@@ -24,7 +24,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "server:dev": "concurrently \"npm start\" \"nodemon\""
+    "server:dev": "concurrently \"npm start\" \"nodemon\"",
+    "apollo:codegen": "apollo client:codegen --endpoint=http://localhost:3001/graphql --target typescript --outputFlat ./types/client/gql"
   },
   "eslintConfig": {
     "extends": "react-app"

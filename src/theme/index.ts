@@ -10,13 +10,15 @@ const {
   IThemeInterface
 >
 
-export interface IThemeInterface {
-  primaryColor: string
+export const theme = {
+  color: {
+    primaryColor: '#2abf65',
+    pcLightYellow: '#FEFDDF',
+    pcWarmRed: '#FF4635',
+  },
 }
 
-export const theme = {
-  primaryColor: '#2abf65',
-}
+export type IThemeInterface = typeof theme
 
 export default styled
 export { css, createGlobalStyle, keyframes, ThemeProvider }

@@ -8,6 +8,6 @@ const Tag: S.DefineModelAttributes<TagType> = {
 }
 
 export const TagModel: ModelConf<TagType> = {
-  modelName: 'Tag',
+  modelName: 'tag',
   modelAttributes: Tag,
 }

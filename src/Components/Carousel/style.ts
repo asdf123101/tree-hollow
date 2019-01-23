@@ -2,10 +2,10 @@ import styled from '../../theme'
 
 const CarouselFragWrapper = styled.div`
   height: 500px;
-  text-align:left;
+  text-align: left;
   display: flex;
-  flex-direction: column
   justify-content: center;
+  align-items: center;
   padding: 10px;
 `
 

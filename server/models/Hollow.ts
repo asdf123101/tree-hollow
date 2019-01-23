@@ -9,6 +9,6 @@ const Hollow: S.DefineModelAttributes<HollowType> = {
 }
 
 export const HollowModel: ModelConf<HollowType> = {
-  modelName: 'Hollow',
+  modelName: 'hollow',
   modelAttributes: Hollow,
 }
