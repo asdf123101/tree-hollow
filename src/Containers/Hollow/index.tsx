@@ -13,11 +13,11 @@ const Hollow = () => {
   if (loading) {
     return <h1>Loading</h1>
   }
-  const [crouselList, updateCrouselList] = useState(data.hollows)
+  const [carouselList, updateCarouselList] = useState(data.hollows)
   return (
     <Fragment>
-      <Carousel crouselList={crouselList} />
-      <Post hollowList={crouselList} updateCrousel={updateCrouselList} />
+      <Carousel carouselList={carouselList} />
+      <Post hollowList={carouselList} updateCrousel={updateCarouselList} />
     </Fragment>
   )
 }

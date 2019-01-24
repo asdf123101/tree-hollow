@@ -1,8 +1,9 @@
 import React, { Fragment, ReactElement } from 'react'
 import Slider, { Settings } from 'react-slick'
 
-import { Tag } from '../Tag/style'
-import { CarouselContainer, CarouselFragWrapper } from './style'
+import { Card } from '../Card'
+import { TagList } from '../Tag'
+import { CarouselContainer } from './style'
 
 // can't set baseUrl and path with create-react-app atm
 import { GetHollows_hollows } from '../../../types/client/gql/GetHollows'
@@ -11,9 +12,9 @@ import './slick-theme.css'
 import './slick.css'
 
 export default ({
-  crouselList,
+  carouselList,
 }: {
-  crouselList: GetHollows_hollows[]
+  carouselList: GetHollows_hollows[]
 }): ReactElement<{}> => {
   const settings: Settings = {
     autoplay: true,
@@ -28,17 +29,13 @@ export default ({
   return (
     <CarouselContainer className="container">
       <Slider {...settings}>
-        {crouselList.map((crouselFrag, index) => (
+        {carouselList.map((carouselFrag, index) => (
+          // virtual wrapper for react-slick
           <Fragment key={index}>
-            <CarouselFragWrapper>
-              <p>
-                {crouselFrag.payload}
-                <br />
-                {crouselFrag.tags.map(
-                  tag => tag && <Tag key={tag.name}>{tag.name}</Tag>
-                )}
-              </p>
-            </CarouselFragWrapper>
+            <Card>
+              <p style={{ margin: 0 }}>{carouselFrag.payload}</p>
+              <TagList list={carouselFrag.tags!.map(tag => tag.name)} />
+            </Card>
           </Fragment>
         ))}
       </Slider>

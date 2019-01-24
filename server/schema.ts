@@ -12,7 +12,7 @@ export const typeDefs = gql`
 
   type Hollow {
     payload: String!
-    tags: [Tag]!
+    tags: [Tag!]
   }
 
   type Tag {

@@ -13,7 +13,7 @@ export interface GetHollows_hollows_tags {
 export interface GetHollows_hollows {
   __typename: "Hollow";
   payload: string;
-  tags: (GetHollows_hollows_tags | null)[];
+  tags: GetHollows_hollows_tags[] | null;
 }
 
 export interface GetHollows {
