@@ -20,16 +20,20 @@ export interface ModelConf<TModel> {
   modelAttributes: S.DefineModelAttributes<TModel>
 }
 
-export interface TagType {
+interface defaultModelFields {
+  // these fields are added automatically by Sequelize
+  createdAt?: Date
+  updatedAt?: Date
+  id?: string
+}
+
+export interface TagType extends defaultModelFields {
   name: string
   weight?: number
 }
 
-export interface HollowType {
+export interface HollowType extends defaultModelFields {
   payload: string
-  // only for dev, these fields are added automatically
-  createdAt?: Date
-  updatedAt?: Date
 }
 
 export interface HollowInstance
@@ -40,4 +44,9 @@ export interface HollowInstance
     string,
     S.DefineModelAttributes<any>
   >
+  getTags: S.BelongsToGetAssociationMixin<S.Instance<TagType>>
 }
+
+export interface TagInstance
+  extends S.Instance<TagType>,
+    S.DefineModelAttributes<TagType> {}

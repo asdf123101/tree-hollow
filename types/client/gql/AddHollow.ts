@@ -4,18 +4,18 @@
 import { AddHollowInput } from "./globalTypes";
 
 // ====================================================
-// GraphQL mutation operation: UpdateHollowList
+// GraphQL mutation operation: AddHollow
 // ====================================================
 
-export interface UpdateHollowList_updateHollowList {
+export interface AddHollow_addHollow {
   __typename: "Hollow";
   payload: string;
 }
 
-export interface UpdateHollowList {
-  updateHollowList: UpdateHollowList_updateHollowList;
+export interface AddHollow {
+  addHollow: AddHollow_addHollow;
 }
 
-export interface UpdateHollowListVariables {
+export interface AddHollowVariables {
   hollow: AddHollowInput;
 }

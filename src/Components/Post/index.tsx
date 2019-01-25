@@ -11,7 +11,7 @@ import { useMutation } from 'react-apollo-hooks'
 import TextArea from './TextArea'
 
 import { HollowType } from '../../../types/server'
-import { UPDATE_HOLLOW_LIST } from './queries'
+import { ADD_HOLLOW } from './queries'
 
 export default ({
   hollowList,
@@ -23,7 +23,7 @@ export default ({
   const [isUpdateSuccessful, setIsUpdateSuccessful] = useState(false)
   const [shouldOpen, setShouldOpen] = useState(false)
   const [textValue, setValue] = useState('')
-  const updateHollowList = useMutation(UPDATE_HOLLOW_LIST)
+  const updateHollowList = useMutation(ADD_HOLLOW)
 
   const handleClick = () => {
     setShouldOpen(!shouldOpen)

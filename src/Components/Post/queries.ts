@@ -1,7 +1,8 @@
 import gql from 'graphql-tag'
-export const UPDATE_HOLLOW_LIST = gql`
-  mutation UpdateHollowList($hollow: String!) {
-    updateHollowList(hollow: $hollow) {
+
+export const ADD_HOLLOW = gql`
+  mutation AddHollow($hollow: AddHollowInput!) {
+    addHollow(newHollow: $hollow) {
       payload
     }
   }
