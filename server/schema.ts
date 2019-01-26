@@ -59,23 +59,26 @@ export const resolvers = {
   Mutation: {
     addHollow: async (_: any, { newHollow }: { newHollow: AddHollowInput }) => {
       const { hollow, tags } = newHollow
+      const tagLen = tags.length
+      // limit number of tags
+      if (tagLen > 5) {
+        throw Error('Too many tags!')
+      }
       const hollowTbl = hollowCtrlr.getConn.getTable(HollowModel.modelName)
       const tagTbl = hollowCtrlr.getConn.getTable(TagModel.modelName)
-      const tagsInstList = await Promise.all(
-        tags.map(async tag => {
-          const [tagInst] = await tagTbl.findOrCreate({
-            where: tag as WhereOptions<TagInput>,
-          })
-          return tagInst
-        })
-      )
-      // TODO: check tag existence
+      const { count, rows: tagInstList } = await tagTbl.findAndCountAll({
+        where: { name: tags.map(tag => tag.name) },
+      })
+      // verify tag existence
+      if (count !== tagLen) {
+        throw Error('Requested tag does not exist!')
+      }
       const hollowInst = (await hollowTbl.create(hollow)) as HollowInstance
-      hollowInst.setTags(tagsInstList)
+      hollowInst.setTags(tagInstList)
       return {
         id: hollowInst.id,
         payload: hollowInst.payload,
-        tags: tagsInstList,
+        tags: tagInstList,
       }
     },
   },

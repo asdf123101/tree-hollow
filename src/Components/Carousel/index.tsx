@@ -17,12 +17,13 @@ export default ({
   carouselList: GetHollows_hollows[]
 }): ReactElement<{}> => {
   const settings: Settings = {
-    autoplay: true,
+    /* autoplay: true, */
     autoplaySpeed: 5000,
     cssEase: 'ease-in-out',
     infinite: true,
+    centerMode: true,
     speed: 500,
-    slidesToShow: 1,
+    slidesToShow: 3,
     slidesToScroll: 1,
   }
 
@@ -30,13 +31,17 @@ export default ({
     <CarouselContainer className="container">
       <Slider {...settings}>
         {carouselList.map((carouselFrag, index) => (
-          // virtual wrapper for react-slick
-          <Fragment key={index}>
-            <Card>
+          <Card key={index}>
+            <div
+              style={{
+                height: '100%',
+                overflowY: 'auto',
+              }}
+            >
               <p style={{ margin: 0 }}>{carouselFrag.payload}</p>
               <TagList list={carouselFrag.tags!.map(tag => tag.name)} />
-            </Card>
-          </Fragment>
+            </div>
+          </Card>
         ))}
       </Slider>
     </CarouselContainer>

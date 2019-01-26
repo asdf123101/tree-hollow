@@ -13,6 +13,7 @@ const {
 export const theme = {
   color: {
     primaryColor: '#2abf65',
+    secondaryColor: '#7FC29B',
     pcLightYellow: '#FEFDDF',
     pcWarmRed: '#FF4635',
   },
