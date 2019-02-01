@@ -3,8 +3,7 @@ import { gql } from 'apollo-server'
 import { HollowCtrlr } from 'controllers/HollowCtrlr'
 import { HollowModel } from 'models/Hollow'
 import { TagModel } from 'models/Tags'
-import { WhereOptions } from 'sequelize'
-import { AddHollowInput, TagInput } from '../types/client/gql/globalTypes'
+import { AddHollowInput } from '../types/client/gql/globalTypes'
 import { HollowInstance } from '../types/server'
 
 // The GraphQL schema
